@@ -2,24 +2,27 @@ use glium::{Surface, texture::UncompressedFloatFormat};
 
 #[macro_use]
 extern crate glium;
+extern crate image;
 
 
 const vertex_shader_src: &str = r#"
     #version 140
 
     in vec2 position;
+    out vec2 my_attr;
 
     uniform mat4 matrix;
 
     void main() {
-        vec2 pos = position;
+        my_attr = position;
         gl_Position = matrix * vec4(position, 0.0, 1.0); 
     }
 "#;
 
 const fragment_shader_src: &str = r#"
     #version 140
-
+    
+    in vec2 my_attr;
     out vec4 color;
     uniform float r;
     uniform float g;
@@ -28,7 +31,7 @@ const fragment_shader_src: &str = r#"
 
     void main() {
 
-        color = vec4(r, g, b, a);
+        color = vec4(my_attr, 0.0, 1.0);
     }
 "#;
 
@@ -77,26 +80,26 @@ fn main() {
         }
 
         if increase {
-            t += 0.001;
+            t += 0.00005;
         } else  {
-            t -= 0.001;
+            t -= 0.00005;
         }
 
         // println!("{counter}");
         let mut target = display.draw();
-        target.clear_color(0.0, 0.0, 0.0, counter); 
+        target.clear_color(1.0, 1.0, 1.0, counter); 
 
         let unifroms = uniform! {
             matrix: [
-                [t.sin(), t.tan(), 0.0, 0.0],
-                [-t.sin(), t.tan(), 0.0, 0.0],
+                [ t.tan(), t.sin(), 0.0, 0.0],
+                [-t.sin(),-t.tan(), 0.0, 0.0],
                 [1.0, 0.0, 1.0, 0.0],
                 [ t , 0.0, 0.0, 1.0f32],
             ],
-            r: 0.627 as f32,
-            g: 0.125 as f32,
-            b: 0.941 as f32,
-            a: 1.0 as f32
+            r: 0.627_f32,
+            g: 0.125_f32,
+            b: 0.941_f32,
+            a: 1.0_f32
         };
 
         target.draw(&vertex_buffer, indices, &program, &unifroms,
