@@ -141,11 +141,19 @@ fn main() {
         let view = view_matrix(&[2.0, 2.0, 1.0], &[-2.0, -2.0, 1.0], &[0.0, 1.0, 0.0]);
 
         let unifroms = uniform! {
+<<<<<<< Updated upstream:rust/learning-glium/src/main.rs
             model: [
                 [0.01, 0.0, 0.0, 0.0],
                 [0.0, 0.01, 0.0, 0.0],
                 [0.0, 0.0, 0.01, 0.0],
                 [0.0 , 0.0, 2.0, 1.0f32],
+=======
+            matrix: [
+                [t.cos(), t.tan(), 0.0, 0.0],
+                [-t.sin(), t.cos(), 0.0, 0.0],
+                [1.0, 0.0, 1.0, 0.0],
+                [ t , 0.0, 0.0, 1.0f32],
+>>>>>>> Stashed changes:libraries/rust/glium/src/main.rs
             ],
             perspective: perspective,
             view: view,
