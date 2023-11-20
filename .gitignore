@@ -1,4 +1,5 @@
 languages/rust/rustlings/
+libraries/rust/
 .venv
 
 libraries/python/pytorch/data/
