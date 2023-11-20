@@ -3,3 +3,5 @@ libraries/rust/
 .venv
 
 libraries/python/pytorch/data/
+
+Azure-Go-Gremlin/.env
